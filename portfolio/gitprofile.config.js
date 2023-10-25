@@ -19,8 +19,8 @@ const config = {
       youtube: 'Samuel Archibong',
       dribbble: '',
       behance: '',
-      medium: 'samuelarchibong',
-      dev: 'samuelarchibong',
+      medium: '@archibong.chinonso.samuel',
+      dev: '@archibong',
       stackoverflow: 'archibong-samuel',
       skype: '',
       telegram: '',
@@ -84,20 +84,20 @@ const config = {
       },
       {
         name: 'Software Engineering',
-        body: 'Holberton SE',
+        body: 'ALX Africa',
         year: '2023',
         link: 'https://example.com',
       },
     ],
     education: [
       {
-        institution: 'Niger Delta University',
-        degree: 'Computer Science',
+        institution: 'ken saro-wiwa Polytechinic, Bori',
+        degree: 'Higer Diploma in Business Administration and Management',
         from: '2017',
         to: '2022',
       },
       {
-        institution: 'Ken saro-wiwa Polytechnic',
+        institution: 'Ken saro-wiwa Polytechnic, Bori',
         degree: 'Nation Diploma in Business Administration and Management',
         from: '2014',
         to: '2016',
@@ -197,11 +197,11 @@ const config = {
     },
   
     // Optional Footer. Supports plain text or HTML.
-    footer: `Made with <a 
-        class="text-primary" href="https://github.com/archbong/software-engineer-profollio"
+    footer: `Made by <a 
+        class="text-primary" href="https://github.com/archbong/mrarchibong"
         target="_blank"
         rel="noreferrer"
-      >GitProfile</a> and ❤️`,
+      >ALX FullStack Software Engineer</a> with ❤️ for Programming`,
   };
   
   export default config;

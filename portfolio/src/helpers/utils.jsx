@@ -230,7 +230,7 @@ export const notFoundError = {
 }
 
 export const genericError = {
-    staus: 500,
+    status: 500,
     title: 'Ops!!',
     subTitle: 'Something went wrong.',
 };
