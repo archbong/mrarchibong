@@ -3,7 +3,7 @@ import Card from "@/components/Card";
 
 export default function AboutImage() {
   return (
-    <Card classname="h-96">
+    <Card className="h-96">
       <div className="h-96 carousel rounded-box">
         <div className="carousel-item w-full">
           <Image

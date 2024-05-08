@@ -4,9 +4,10 @@ import Subtitle from "../typography/subtitle/Subtitle";
 import FavouriteJams from "./FavouriteJams";
 import TopStack from "./TopStack";
 import AboutImage from "./AboutImage";
-import TimeLine from "./TimeLine";
+import Socials from "./Socials";
 import Education from "./Education";
 import Background from "./Background";
+import Experience from "./Experience";
 
 export default function AboutInfo() {
   return (
@@ -22,20 +23,7 @@ export default function AboutInfo() {
               </p>
             </div>
             <div className="flex justify-center items-center gap-10">
-              <div className="flex justify-center space-x-3">
-                <button>
-                  <div className="skeleton w-10 h-10 rounded-full shrink-0"></div>
-                </button>
-                <button>
-                  <div className="skeleton w-10 h-10 rounded-full shrink-0"></div>
-                </button>
-                <button>
-                  <div className="skeleton w-10 h-10 rounded-full shrink-0"></div>
-                </button>
-                <button>
-                  <div className="skeleton w-10 h-10 rounded-full shrink-0"></div>
-                </button>
-              </div>
+              <Socials />
               <div>
                 <button className="btn rounded-xl h-5">Resume</button>
               </div>
@@ -45,7 +33,7 @@ export default function AboutInfo() {
        <Background />
       </div>
       <div>
-        <Card classname="card h-80">
+        <Card className="card h-80">
           <figure>
             <Image
               src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
@@ -70,25 +58,7 @@ export default function AboutInfo() {
         <TopStack />
       </div>
       <div>
-        <Card>
-          <Subtitle className="p-5 uppercase">experience</Subtitle>
-          <ul>
-            <li>
-              <div className="flex justify-center space-x-10">
-                <div>2021 - Now</div>
-                <div>
-                  <div>
-                    <p>Co Founder Software Engineer</p>
-                    <div className="flex justify-evenly m-2 items-center">
-                      <p>PrimeReserved</p>
-                      <div className="badge badge-outline">remote</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </Card>
+        <Experience />
         <Card>
           <div>
             <Subtitle className="p-5">awards & features</Subtitle>
