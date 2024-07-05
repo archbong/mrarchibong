@@ -7,35 +7,75 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    screens: {
-      'phone': '640px',
-      'tablet': '768px',
-      'laptop': '1024px',
-      'desktop': '1280px',
-    },
     extend: {
-      colors: {
-        nigeria: {
-          green: "#008000",
-          white: "#FFFFFF",
-          red: "#FF0000",
-          earth1: "#964B00",
-          earth2: "#786C3B",
-          earth3: "#452B1F",
-          deepBlue1: "#032B44",
-          deepBlue2: "#021331",
-          gradient: {
-            "earth-to-green": "linear-gradient(to bottom, #964B00, #008000)",
-            "blue-to-red": "linear-gradient(to bottom, #032B44, #FF0000)",
-          },
-        },
-        backgroundImage: {
-          "earth-gradient":
-            "linear-gradient(to bottom, #964B00, #786C3B, #452B1F)",
-        },
+      backgroundImage: {
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+        "gradient-conic":
+          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      },
+      fontFamily: {
+        body: ['YourPreferredFont', 'sans-serif'], // Ensure you have this configured if using Tailwind
       },
     },
-  },
-  plugins: [require("@tailwindcss/typography"), require("daisyui")],
+      colors: {
+            "border": "hsl(var(--border))",
+            "input": "hsl(var(--input))",
+            "ring": "hsl(var(--ring))",
+            "background": "hsl(var(--background))",
+            "foreground": "hsl(var(--foreground))",
+            "primary": {
+              "DEFAULT": "hsl(var(--primary))",
+              "foreground": "hsl(var(--primary-foreground))"
+            },
+            "secondary": {
+              "DEFAULT": "hsl(var(--secondary))",
+              "foreground": "hsl(var(--secondary-foreground))"
+            },
+            "destructive": {
+              "DEFAULT": "hsl(var(--destructive))",
+              "foreground": "hsl(var(--destructive-foreground))"
+            },
+            "muted": {
+              "DEFAULT": "hsl(var(--muted))",
+              "foreground": "hsl(var(--muted-foreground))"
+            },
+            "accent": {
+              "DEFAULT": "hsl(var(--accent))",
+              "foreground": "hsl(var(--accent-foreground))"
+            },
+            "popover": {
+              "DEFAULT": "hsl(var(--popover))",
+              "foreground": "hsl(var(--popover-foreground))"
+            },
+            "card": {
+              "DEFAULT": "hsl(var(--card))",
+              "foreground": "hsl(var(--card-foreground))"
+            }
+          },
+      borderRadius: {
+            "lg": "var(--radius)",
+            "md": "calc(var(--radius) - 2px)",
+            "sm": "calc(var(--radius) - 4px)"
+          },
+      keyframes: {
+            "accordion-down": {
+              "from": {
+                "height": "0"
+              },
+              "to": {
+                "height": "var(--radix-accordion-content-height)"
+              }
+            },
+            "accordion-up": {
+              "from": {
+                "height": "var(--radix-accordion-content-height)"
+              },
+              "to": {
+                "height": "0"
+              }
+            }
+          }
+},
+  plugins: [require("tailwindcss-animate")],
 };
 export default config;
