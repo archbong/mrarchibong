@@ -1,241 +1,595 @@
 /**
- * v0 by Vercel.
- * @see https://v0.dev/t/sTx8cwZjV6M
- * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
+ * Backend-Focused Landing Page
+ * Designed to convert businesses into paying API/retainer clients
  */
-"use client"
+"use client";
 
-import Link from "next/link"
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Button } from "@/components/ui/button"
-import Image from "next/image"
-import MedalIcon from "@/components/icon/MedalIcon"
-import StarIcon from "@/components/icon/StarIcon"
-import AwardIcon from "@/components/icon/AwardIcon"
-import TrophyIcon from "@/components/icon/TrophyIcon"
-import GitlabIcon from "@/components/icon/GitlabIcon"
-import CodepenIcon from "@/components/icon/CodepenIcon"
-import Header from "@/components/header/Header"
-import { stacks } from "@/components/skill/skills"
-import { projects } from "@/components/project/Projects"
-import HeroWithVideo from "@/components/landingPage/HeroWithvideo"
-import { thunderVideo } from "@/public/video/video"
-import Footer from "@/components/footer/footer"
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from 'react-hook-form';
-import { z } from "zod"
-import { useState } from 'react';
-import { createContact } from '@/lib/actions';
-import { Report } from 'notiflix/build/notiflix-report-aio';
-
-const contactSchema = z.object({
-  name: z.string().min(8, {
-    message: "Name is required" }),
-  email: z.string({
-    message: "Email is required" }),
-  message: z.string({
-    message: "Message is required" }),
-});
-
-type ContactFormValues = z.infer<typeof contactSchema>;
+import Link from "next/link";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import Header from "@/components/header/Header";
+import Footer from "@/components/footer/footer";
+import {
+  CheckCircle,
+  Shield,
+  Zap,
+  Cpu,
+  Database,
+  Server,
+  Clock,
+  Users,
+} from "lucide-react";
 
 export default function Page() {
-
-  const { register, handleSubmit, formState: { errors }, reset } = useForm<ContactFormValues>({
-    resolver: zodResolver(contactSchema)
-  });
-  const [formStatus, setFormStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
-
-  const onSubmit = async (data: ContactFormValues) => {
-    setFormStatus('loading');
-    const result = await createContact(data);
-
-    if (result.success) {
-      setFormStatus('success');
-      Report.success(
-        'A Big Thanks',
-        'Your message was sent, I will get in touch asap!!',
-        'close',
-        {
-          width: '360px',
-          svgSize: '120px',
-        },)
-      reset();
-    } else {
-      setErrorMessage(result.error);
-      setFormStatus('error');
-    }
-  };
   return (
     <>
-    <Header />
-      {/* <Hero /> */}
-      <HeroWithVideo 
-          title="Mr Archibong"
-          video={thunderVideo}
-          description={`Software Engineer | Both-End Developer.`}
-      >
-        <h1 className="text-4xl md:text-6xl font-bold tracking-tighter text-primary-foreground">
-          <span className="text-2xl text-primary-background">C9</span> ALX SE
-        </h1>
-      </HeroWithVideo>
-    <div className="flex justify-center flex-col sm:min-h-[100dvh] min-h-[100dvh]">
-      <section className="w-full py-24 bg-muted">
-        <div className="px-4 md:px-6 grid grid-cols-1 md:grid-cols-2 gap-10 place-content-center">
-          <div className="space-y-4">
-            <h2 className="text-4xl font-bold tracking-tighter font-inter">My Skills</h2>
-            <p className="text-muted-foreground text-xl font-inter">
-              As a Next.js developer, Ive honed my skills in building modern, scalable, and performant web
-              applications. Here are some of the key technologies and tools Im proficient in:
-            </p>
-          </div>
-          <div className="grid grid-cols-1 gap-6">
-            {stacks.map((stack) => (
-              <div key={stack.id} className="bg-background rounded-lg p-6 shadow-lg">
-              <CodepenIcon className="w-10 h-10 text-primary" />
-              <h3 className="text-xl font-bold mt-2 font-inter">{stack.stack}</h3>
-              <p className="text-muted-foreground font-inter">{stack.description}</p>
+      <Header />
+
+      {/* 1️⃣ Hero Section (Above the Fold) */}
+      <section className="w-full py-20 md:py-32 bg-gradient-to-br from-slate-900 to-slate-800 text-white">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+                Backend APIs that scale, automate, and stay reliable as your
+                business grows
+              </h1>
+              <p className="text-xl text-slate-300">
+                I design and maintain enterprise-grade backend systems using
+                Node.js and Django—so your team can focus on growth, not
+                infrastructure issues.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button
+                  size="lg"
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-6 text-lg"
+                >
+                  Book a Backend Consultation
+                </Button>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="border-white text-white hover:bg-white/10 px-8 py-6 text-lg"
+                >
+                  See How I Work
+                </Button>
+              </div>
             </div>
-            ))}
-          </div>
-        </div>
-      </section>
-      <section className="w-full py-24">
-        <div className="px-4 md:px-6 space-y-6">
-          <div className="space-y-4">
-            <h2 className="text-4xl font-bold tracking-tighter font-inter">My Projects</h2>
-            <p className="text-muted-foreground text-xl font-inter">
-              Check out some of the exciting web applications Ive built using Next.js and other cutting-edge
-              technologies.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projects.map((project) => (
-              <Card key={project.id} className="h-full w-full">
-              <CardHeader>
-                <CardTitle className="font-bold font-inter">{project.title}</CardTitle>
-                <CardDescription className="font-bold font-inter">{project.description}
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Image
-                  src={project.image ?? "/logo/logo.png"}
-                  alt={project.title}
-                  width={6000}
-                  height={500}
-                  className="rounded-lg object-cover"
-                />
-              </CardContent>
-              <CardFooter>
-                <div className="flex justify-between gap-5 items-center">
-                  <div className="flex items-center gap-2">
-                    <GitlabIcon className="w-5 h-5 text-muted-foreground" />
-                    <Link href={project.github ?? "#"} className="text-muted-foreground hover:underline font-inter" prefetch={false}>
-                      View on GitHub
-                    </Link>
+            <div className="relative">
+              <div className="bg-slate-800/50 rounded-2xl p-8 border border-slate-700">
+                <div className="space-y-6">
+                  <div className="flex items-center gap-4">
+                    <Server className="w-8 h-8 text-blue-400" />
+                    <div>
+                      <h3 className="font-semibold">API Server</h3>
+                      <p className="text-sm text-slate-400">
+                        Node.js + Express
+                      </p>
+                    </div>
+                    <div className="ml-auto flex items-center gap-2">
+                      <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                      <span className="text-sm">Live</span>
+                    </div>
                   </div>
-                  <Link
-                    href={project.path ?? "#"}
-                    className="inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 font-inter"
-                    prefetch={false}
-                  >
-                    Live Demo
-                  </Link>
+                  <div className="h-px bg-slate-700"></div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="bg-slate-900/50 rounded-lg p-4">
+                      <div className="text-2xl font-bold">99.9%</div>
+                      <div className="text-sm text-slate-400">Uptime</div>
+                    </div>
+                    <div className="bg-slate-900/50 rounded-lg p-4">
+                      <div className="text-2xl font-bold">&lt;100ms</div>
+                      <div className="text-sm text-slate-400">
+                        Response Time
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </CardFooter>
-            </Card>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 2️⃣ Trust Anchor (Why You) */}
+      <section className="w-full py-16 bg-white">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div className="text-center space-y-3">
+              <Shield className="w-12 h-12 text-blue-600 mx-auto" />
+              <h3 className="text-lg font-semibold">
+                Enterprise Software Developer
+              </h3>
+              <p className="text-slate-600">Production API experience</p>
+            </div>
+            <div className="text-center space-y-3">
+              <Database className="w-12 h-12 text-blue-600 mx-auto" />
+              <h3 className="text-lg font-semibold">
+                Secure & Scalable Systems
+              </h3>
+              <p className="text-slate-600">Built for growth</p>
+            </div>
+            <div className="text-center space-y-3">
+              <Clock className="w-12 h-12 text-blue-600 mx-auto" />
+              <h3 className="text-lg font-semibold">Long-term Ownership</h3>
+              <p className="text-slate-600">Ongoing maintenance & support</p>
+            </div>
+            <div className="text-center space-y-3">
+              <Users className="w-12 h-12 text-blue-600 mx-auto" />
+              <h3 className="text-lg font-semibold">Team Collaboration</h3>
+              <p className="text-slate-600">
+                Clear communication with non-technical teams
+              </p>
+            </div>
+          </div>
+          <div className="mt-12 text-center">
+            <p className="text-slate-500 italic">
+              Currently building and maintaining enterprise applications used by
+              real teams.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* 3️⃣ The Problems You Solve */}
+      <section className="w-full py-20 bg-slate-50">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Does this sound familiar?
+            </h2>
+            <p className="text-xl text-slate-600">
+              These are backend problems—and they get expensive if ignored.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                icon: "❌",
+                title: "Backend is slow or unreliable",
+                description:
+                  "Performance issues affecting user experience and business operations",
+              },
+              {
+                icon: "❌",
+                title: "Manual processes wasting staff time",
+                description:
+                  "Repetitive tasks that could be automated eating into productivity",
+              },
+              {
+                icon: "❌",
+                title: "App growth causing frequent bugs",
+                description:
+                  "Scaling challenges leading to instability and downtime",
+              },
+              {
+                icon: "❌",
+                title: "No one truly owns the backend system",
+                description:
+                  "Lack of dedicated expertise for maintenance and improvements",
+              },
+            ].map((problem, index) => (
+              <Card
+                key={index}
+                className="bg-white border-slate-200 hover:shadow-lg transition-shadow"
+              >
+                <CardHeader>
+                  <div className="text-3xl mb-2">{problem.icon}</div>
+                  <CardTitle className="text-lg">{problem.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-slate-600">{problem.description}</p>
+                </CardContent>
+              </Card>
             ))}
+          </div>
+        </div>
+      </section>
 
-          </div>
-        </div>
-      </section>
-      <section className="w-full py-24 bg-muted">
-        <div className="px-4 md:px-6 grid grid-cols-1 md:grid-cols-2 place-content-center gap-10">
-          <div className="space-y-4">
-            <h2 className="text-4xl font-bold tracking-tighter font-inter">My Achievements</h2>
-            <p className="text-muted-foreground text-xl font-inter">
-              Im proud of the recognition and awards Ive received for my work as a Next.js developer. Here are some of
-              my notable achievements:
+      {/* 4️⃣ What You Do (Backend-Only Services) */}
+      <section className="w-full py-20 bg-white">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Backend-Only Services
+            </h2>
+            <p className="text-xl text-slate-600">
+              Focused expertise for businesses that need reliable backend
+              systems
             </p>
           </div>
-          <div className="grid grid-cols-1 gap-6">
-            <div className="bg-background rounded-lg p-6 shadow-lg">
-              <TrophyIcon className="w-10 h-10 text-primary" />
-              <h3 className="text-xl font-bold mt-2 font-inter">Next.js Contributor of the Year</h3>
-              <p className="text-muted-foreground font-inter">
-                Recognized for my contributions to the Next.js open-source project
-              </p>
-            </div>
-            <div className="bg-background rounded-lg p-6 shadow-lg">
-              <AwardIcon className="w-10 h-10 text-primary" />
-              <h3 className="text-xl font-bold mt-2 font-inter">Best Next.js Project</h3>
-              <p className="text-muted-foreground font-inter">
-                Awarded for my innovative e-commerce platform built with Next.js
-              </p>
-            </div>
-            <div className="bg-background rounded-lg p-6 shadow-lg">
-              <StarIcon className="w-10 h-10 text-primary" />
-              <h3 className="text-xl font-bold mt-2 font-inter">Top 10 Next.js Developers</h3>
-              <p className="text-muted-foreground font-inter">
-                Ranked among the top 10 Next.js developers in the industry
-              </p>
-            </div>
-            <div className="bg-background rounded-lg p-6 shadow-lg">
-              <MedalIcon className="w-10 h-10 text-primary" />
-              <h3 className="text-xl font-bold mt-2 font-inter">Next.js Hackathon Winner</h3>
-              <p className="text-muted-foreground font-inter">
-                Won a prestigious Next.js hackathon for my innovative project
-              </p>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {[
+              {
+                icon: <Server className="w-8 h-8 text-blue-600" />,
+                title: "API Design & Development",
+                description:
+                  "RESTful, secure, and scalable APIs with clear documentation for frontend teams",
+                features: [
+                  "Production-ready APIs",
+                  "Comprehensive documentation",
+                  "Authentication & authorization",
+                ],
+              },
+              {
+                icon: <Zap className="w-8 h-8 text-blue-600" />,
+                title: "Backend Automation",
+                description:
+                  "Background jobs, queues, and scheduled tasks for payment, webhook, and data processing",
+                features: [
+                  "Workflow automation",
+                  "Payment processing",
+                  "Data pipeline management",
+                ],
+              },
+              {
+                icon: <Cpu className="w-8 h-8 text-blue-600" />,
+                title: "Enterprise Application Development",
+                description:
+                  "Internal systems and business-critical tools designed for long-term maintainability",
+                features: [
+                  "Business logic implementation",
+                  "Database design",
+                  "System architecture",
+                ],
+              },
+              {
+                icon: <Shield className="w-8 h-8 text-blue-600" />,
+                title: "API Maintenance & Retainers",
+                description:
+                  "Monitoring, optimization, and ongoing improvements with monthly backend ownership",
+                features: [
+                  "Performance monitoring",
+                  "Security updates",
+                  "Ongoing support",
+                ],
+              },
+            ].map((service, index) => (
+              <Card
+                key={index}
+                className="border-slate-200 hover:shadow-lg transition-shadow"
+              >
+                <CardHeader>
+                  <div className="flex items-center gap-3">
+                    {service.icon}
+                    <CardTitle className="text-xl">{service.title}</CardTitle>
+                  </div>
+                  <CardDescription className="text-lg">
+                    {service.description}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-2">
+                    {service.features.map((feature, i) => (
+                      <li key={i} className="flex items-center gap-2">
+                        <CheckCircle className="w-4 h-4 text-green-500" />
+                        <span className="text-slate-700">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+                <CardFooter>
+                  <Button variant="outline" className="w-full">
+                    Learn More
+                  </Button>
+                </CardFooter>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
-      <section className="w-full py-24">
-        <div className="px-4 md:px-6 space-y-6">
-          <div className="space-y-4">
-            <h2 className="text-4xl font-bold tracking-tighter font-inter">Get in Touch</h2>
-            <p className="text-muted-foreground text-xl font-inter">
-              Im always excited to collaborate on new projects or discuss the latest advancements in the world of
-              Next.js. Feel free to reach out to me using the form below.
+
+      {/* 5️⃣ How You Work (Process Section) */}
+      <section className="w-full py-20 bg-slate-50">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">How I Work</h2>
+            <p className="text-xl text-slate-600">
+              Predictability = confidence. No guesswork. No rushed hacks.
             </p>
           </div>
-          <form onSubmit={handleSubmit(onSubmit)} className="mx-auto max-w-md space-y-4">
-          <div>
-                <Input type="text" {...register('name')} placeholder="Name" className="font-inter" />
-                {errors.name && <span>{errors.name.message}</span>}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              {
+                step: "1",
+                title: "Understand the business workflow",
+                description:
+                  "Deep dive into your processes to identify automation opportunities and requirements",
+              },
+              {
+                step: "2",
+                title: "Design the backend architecture",
+                description:
+                  "Create scalable, maintainable system designs with clear documentation",
+              },
+              {
+                step: "3",
+                title: "Build & test production-ready APIs",
+                description:
+                  "Implement with best practices, comprehensive testing, and security measures",
+              },
+              {
+                step: "4",
+                title: "Monitor, optimize, and maintain",
+                description:
+                  "Ongoing support, performance monitoring, and continuous improvements",
+              },
+            ].map((process, index) => (
+              <div key={index} className="relative">
+                <div className="bg-white rounded-2xl p-6 border border-slate-200 h-full">
+                  <div className="text-4xl font-bold text-blue-600 mb-4">
+                    {process.step}
+                  </div>
+                  <h3 className="text-xl font-semibold mb-3">
+                    {process.title}
+                  </h3>
+                  <p className="text-slate-600">{process.description}</p>
                 </div>
-                <div>
-                <Input type="email" {...register('email')} placeholder="Email" className="font-inter" />
-                {errors.email && <span>{errors.email.message}</span>}
-                </div>
-                <div>
-                  <Textarea placeholder="Message" {...register('message')} className="font-inter" />
-                  {errors.message && <span>{errors.message.message}</span>}
-                </div>
-            <Textarea placeholder="Message" />
-            <Button type="submit"  disabled={formStatus === 'loading'} className="w-full font-inter">
-              Submit
-            </Button>
-            {formStatus === 'loading' && <p>Sending...</p>}
-                {formStatus === 'success' && <p className='text-center'>Message sent successfully!</p>}
-                {formStatus === 'error' && <p>Error: {errorMessage}</p>}
-          </form>
+                {index < 3 && (
+                  <div className="hidden lg:block absolute top-1/2 right-0 transform translate-x-1/2 -translate-y-1/2">
+                    <div className="w-8 h-0.5 bg-slate-300"></div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       </section>
-    </div>
-     <Footer />
+
+      {/* 6️⃣ Technical Credibility */}
+      <section className="w-full py-20 bg-white">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+                Built with proven tools
+              </h2>
+              <p className="text-xl text-slate-600 mb-8">
+                I choose boring, reliable technology—because production systems
+                should be boring.
+              </p>
+              <div className="grid grid-cols-2 gap-4">
+                {[
+                  "Node.js, Django, Django REST Framework",
+                  "PostgreSQL, MySQL",
+                  "Redis, Celery, BullMQ",
+                  "Docker, Linux, CI/CD",
+                  "AWS, Vercel, Netlify",
+                  "Git, GitHub Actions, Testing",
+                ].map((tech, index) => (
+                  <div key={index} className="flex items-center gap-3">
+                    <CheckCircle className="w-5 h-5 text-green-500" />
+                    <span className="text-slate-700">{tech}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="bg-slate-50 rounded-2xl p-8 border border-slate-200">
+              <h3 className="text-2xl font-semibold mb-6">
+                Why boring technology?
+              </h3>
+              <ul className="space-y-4">
+                <li className="flex items-start gap-3">
+                  <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
+                    <span className="text-blue-600 font-semibold">✓</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold">Proven stability</h4>
+                    <p className="text-slate-600">
+                      Battle-tested in production environments
+                    </p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
+                    <span className="text-blue-600 font-semibold">✓</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold">Easy to maintain</h4>
+                    <p className="text-slate-600">
+                      Large community and extensive documentation
+                    </p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
+                    <span className="text-blue-600 font-semibold">✓</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold">Cost-effective</h4>
+                    <p className="text-slate-600">
+                      Reduced learning curve and hiring costs
+                    </p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 7️⃣ Engagement Models */}
+      <section className="w-full py-20 bg-slate-900 text-white">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Engagement Models
+            </h2>
+            <p className="text-xl text-slate-300">
+              Choose the right partnership model for your backend needs
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Backend Retainer",
+                subtitle: "Most Popular",
+                description: "Monthly backend ownership with ongoing support",
+                features: [
+                  "API monitoring & improvements",
+                  "Performance optimization",
+                  "Security updates",
+                  "Priority support",
+                  "Regular maintenance",
+                ],
+                cta: "Discuss Retainer",
+              },
+              {
+                title: "Project-Based API Development",
+                subtitle: "Fixed Scope",
+                description: "Complete backend builds with clear deliverables",
+                features: [
+                  "Fixed-scope backend builds",
+                  "Clear delivery timeline",
+                  "Comprehensive documentation",
+                  "Testing & deployment",
+                  "Handover support",
+                ],
+                cta: "Start a Project",
+              },
+              {
+                title: "Automation & Integrations",
+                subtitle: "Workflow Focus",
+                description: "Streamline business processes with automation",
+                features: [
+                  "Workflow automation",
+                  "Payment processing",
+                  "Data pipeline setup",
+                  "Third-party integrations",
+                  "Process optimization",
+                ],
+                cta: "Automate Processes",
+              },
+            ].map((model, index) => (
+              <Card
+                key={index}
+                className="bg-slate-800 border-slate-700 hover:border-blue-500 transition-colors"
+              >
+                <CardHeader>
+                  <CardTitle className="text-2xl">{model.title}</CardTitle>
+                  <div className="inline-block bg-blue-600 text-white text-sm px-3 py-1 rounded-full">
+                    {model.subtitle}
+                  </div>
+                  <CardDescription className="text-slate-300 text-lg">
+                    {model.description}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-3">
+                    {model.features.map((feature, i) => (
+                      <li key={i} className="flex items-center gap-3">
+                        <CheckCircle className="w-5 h-5 text-green-400" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+                <CardFooter>
+                  <Button className="w-full bg-blue-600 hover:bg-blue-700">
+                    {model.cta}
+                  </Button>
+                </CardFooter>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 8️⃣ Why Clients Choose Me */}
+      <section className="w-full py-20 bg-white">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                Why Clients Choose Me
+              </h2>
+              <p className="text-xl text-slate-600">
+                Backend systems that businesses can depend on
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="space-y-6">
+                {[
+                  "Backend-only focus (no frontend distractions)",
+                  "Enterprise application experience",
+                  "Clear communication with non-technical teams",
+                  "Systems designed for growth, not demos",
+                ].map((item, index) => (
+                  <div key={index} className="flex items-start gap-4">
+                    <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
+                      <CheckCircle className="w-5 h-5 text-blue-600" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-lg">{item}</h3>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="space-y-6">
+                {[
+                  "Long-term thinking and planning",
+                  "Production API deployment experience",
+                  "Focus on security and scalability",
+                  "Documentation and knowledge transfer",
+                ].map((item, index) => (
+                  <div key={index} className="flex items-start gap-4">
+                    <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
+                      <CheckCircle className="w-5 h-5 text-blue-600" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-lg">{item}</h3>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 9️⃣ Strong Call To Action */}
+      <section className="w-full py-20 bg-gradient-to-br from-blue-900 to-slate-900 text-white">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
+              Need a backend you can trust?
+            </h2>
+            <p className="text-xl text-slate-300 mb-10">
+              Let&apos;s talk about your API, automation, or backend challenges.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button
+                size="lg"
+                className="bg-white text-blue-900 hover:bg-slate-100 px-10 py-6 text-lg font-semibold"
+              >
+                Schedule a Call
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-white text-white hover:bg-white/10 px-10 py-6 text-lg"
+              >
+                Email Me
+              </Button>
+            </div>
+            <div className="mt-12 pt-8 border-t border-white/20">
+              <p className="text-slate-400">
+                Backend API & Automation Engineer • Available for new projects
+                and consultations
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <Footer />
     </>
-  )
+  );
 }
-
-
-
-
-
-
-
-
-
