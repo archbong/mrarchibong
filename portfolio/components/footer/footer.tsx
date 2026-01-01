@@ -38,7 +38,7 @@ export default function Footer() {
                 <Github className="h-5 w-5" />
               </a>
               <a
-                href="mailto:hello@mrarchibong.com"
+                href="mailto:archibong.chinonso.samuel@gmail.com"
                 className="text-slate-400 hover:text-white transition-colors"
                 aria-label="Email"
               >
@@ -149,10 +149,10 @@ export default function Footer() {
               <li className="flex items-start gap-2">
                 <Mail className="h-4 w-4 mt-0.5 flex-shrink-0" />
                 <a
-                  href="mailto:hello@mrarchibong.com"
+                  href="mailto:archibong.chinonso.samuel@gmail.com"
                   className="hover:text-white transition-colors"
                 >
-                  hello@mrarchibong.com
+                  archibong.chinonso.samuel@gmail.com
                 </a>
               </li>
               <li className="flex items-start gap-2">
